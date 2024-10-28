@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.nudg.user.infrastructure.User;
+import org.example.nudg.user.infrastructure.UserEntity;
 
 import java.util.Date;
 
@@ -12,20 +12,27 @@ import java.util.Date;
 @Table(name="minds")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Mind {
+public class MindEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String content;
+    @Column(nullable = false)
+    private String situation;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt = new Date();
+    @Column(nullable = false)
+    private String thought;
 
-    // Getters and Setters
+    @Column(nullable = false)
+    private String feedback;
+
+    @Column(nullable = false)
+    private Long createAt;
+
+    @Column(nullable = false)
+    private Long updateAt;
 }
