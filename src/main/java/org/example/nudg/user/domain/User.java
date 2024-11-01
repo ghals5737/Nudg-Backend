@@ -1,7 +1,7 @@
 package org.example.nudg.user.domain;
 
 public record User(
-        long id,
+        Long id,
         String email,
         String name,
         String picture,

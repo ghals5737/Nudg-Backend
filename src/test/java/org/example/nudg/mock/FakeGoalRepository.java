@@ -1,5 +1,6 @@
 package org.example.nudg.mock;
 
+import org.example.nudg.common.domain.exception.ResourceNotFoundException;
 import org.example.nudg.goal.domain.Goal;
 import org.example.nudg.goal.service.port.GoalRepository;
 
@@ -16,17 +17,17 @@ public class FakeGoalRepository implements GoalRepository {
 
     @Override
     public Goal getById(long id) {
-        return null;
+        return findById(id).orElseThrow(()->new ResourceNotFoundException("Goals",id));
     }
 
     @Override
     public Optional<Goal> findById(long id) {
-        return Optional.empty();
+        return goals.stream().filter(item -> item.id().equals(id)).findAny();
     }
 
     @Override
     public List<Goal> findByUserId(long id) {
-        return null;
+        return goals.stream().filter(item -> item.user().id().equals(id)).toList();
     }
 
     @Override
